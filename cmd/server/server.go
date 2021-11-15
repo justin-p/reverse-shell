@@ -11,7 +11,7 @@ import (
 	"runtime"
 	"strings"
 
-	reverse "github.com/adedayo/reverse-shell/pkg"
+	reverse "github.com/justin-p/reverse-shell/pkg"
 )
 
 var (
