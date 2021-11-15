@@ -1,9 +1,9 @@
-server:
-	GOOS=darwin GOARCH=amd64 go build -o bin/server-darwin cmd/server/server.go
-	GOOS=linux GOARCH=amd64 go build -o bin/server-linux cmd/server/server.go
+buildings:
+	GOOS=linux   GOARCH=amd64 go build -o bin/buildings/barracks       construction_yard/buildings/barracks.go
+	GOOS=windows GOARCH=amd64 go build -o bin/buildings/barracks.exe construction_yard/buildings/barracks.go
 
-client:
-	GOOS=darwin GOARCH=amd64 go build -o bin/client-darwin cmd/client/client.go
-	GOOS=linux GOARCH=amd64 go build -o bin/client-linux cmd/client/client.go
+units:
+	GOOS=linux   GOARCH=amd64 go build -o bin/units/conscript       construction_yard/units/conscript.go
+	GOOS=windows GOARCH=amd64 go build -o bin/units/conscript.exe construction_yard/units/conscript.go
 
-all: client server
+all: units buildings
