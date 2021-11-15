@@ -28,4 +28,4 @@ jobs:
           files: |
             README.md
             LICENSE
-            bin/*
+            bin/**
