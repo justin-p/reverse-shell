@@ -20,8 +20,8 @@ var (
 	keyName   = "serverCert.key"
 )
 
-func init() {
-	//create certificates directory if it doesn't exist
+//create certificates directory if it doesn't exist
+func createFolders() {
 	if _, err := os.Stat(certsPath); os.IsNotExist(err) {
 		if err2 := os.MkdirAll(certsPath, 0755); err2 != nil {
 			log.Fatalf("Could not create the path %s", certsPath)
