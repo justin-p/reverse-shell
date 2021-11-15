@@ -116,6 +116,7 @@ func GenCerts() (certFile, keyFile string, err error) {
 }
 
 func saveKey(fileName string, key *ecdsa.PrivateKey) (string, error) {
+	createFolders()
 	fileName = filepath.Join(certsPath, fileName)
 	file, err := os.Create(fileName)
 	if err != nil {
@@ -133,6 +134,7 @@ func saveKey(fileName string, key *ecdsa.PrivateKey) (string, error) {
 }
 
 func saveCert(fileName string, der []byte) (string, error) {
+	createFolders()
 	fileName = filepath.Join(certsPath, fileName)
 	file, err := os.Create(fileName)
 	if err != nil {
