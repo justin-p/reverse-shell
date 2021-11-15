@@ -1,0 +1,34 @@
+name: Shell Alert 2 release
+on:
+  push:
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Go
+        uses: actions/setup-go@v2.1.4
+        with:
+          go-version: 1.17
+        id: go
+
+      - name: checkout code
+        uses: actions/checkout@v2.4.0
+        
+      - name: run Makefile
+        run: make all
+      
+      - name: publish artifacts
+        uses: actions/upload-artifact@v2.2.4
+        with:
+          name: build
+          path: bin
+      
+      - uses: "marvinpinto/action-automatic-releases@v1.2.1"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          prerelease: false
+          files: |
+            - bin/buildings/*
+            - bin/units/*
