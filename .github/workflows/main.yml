@@ -1,4 +1,4 @@
-name: Shell Alert 2 release
+name: Shell Alert 2 build
 on:
   push:
 
@@ -24,11 +24,3 @@ jobs:
         with:
           name: build
           path: bin
-      
-      - uses: "marvinpinto/action-automatic-releases@v1.2.1"
-        with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          prerelease: false
-          files: |
-            - bin/buildings/*
-            - bin/units/*
