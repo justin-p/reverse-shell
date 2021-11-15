@@ -1,7 +1,5 @@
 # Shell Alert 2
 
-Simple reverse shell client and server written in go.
-
 Based of the work done by [adedayo](https://github.com/adedayo/reverse-shell).
 
 ## Usage
