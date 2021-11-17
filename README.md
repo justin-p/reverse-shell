@@ -30,6 +30,8 @@ Build clients to `./bin/units`
 make units
 ```
 
+**Note:** units_harcoded have their destination set within the build package. Update the `Makefile` to match your destination.
+
 Build everything
 
 ```

